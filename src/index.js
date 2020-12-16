@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+import ReactDOM from 'react-dom'
+import App from './App'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
+const reduser = (state, action) =>{
+  switch (action.type){
+    case "delete":
+      return state.filter((todo, i) => {
+        if(action.payload===i){
+          return false
+        }
+        return true
+      }) 
+    default:
+    return [
+      {title: "mahram", completed: false},
+      {title: "sibiryak", completed: false}
+    ]
+  }
+}
+
+const store = createStore(reduser);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store = {store}>
+    <App/>
+  </Provider>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
