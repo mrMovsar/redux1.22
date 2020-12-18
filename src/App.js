@@ -1,13 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { del } from "./actions"
 function App(props) {
   const todos = useSelector(state => state)
-  const del = (index) => {
-    return {
-      type: "delete",
-      payload: index
-    }
-  }
+  
   const dispatch = useDispatch();
   const handleDelete = (index) =>{
     dispatch(del(index))
